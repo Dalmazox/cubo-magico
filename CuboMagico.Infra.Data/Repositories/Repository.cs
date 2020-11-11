@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace CuboMagico.Infra.Data.Repositories
 {
@@ -64,6 +65,11 @@ namespace CuboMagico.Infra.Data.Repositories
         public virtual TEntity Find<T>(T key)
         {
             return _dbSet.Find(key);
+        }
+
+        public virtual TEntity Unique(Expression<Func<TEntity, bool>> filtro)
+        {
+            return _dbSet.FirstOrDefault(filtro);
         }
 
         public virtual IEnumerable<TEntity> GetAll()

@@ -5,12 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CuboMagico.Domain\CuboMagico.Domain.csproj" />
-    <ProjectReference Include="..\CuboMagico.Infra.Data\CuboMagico.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

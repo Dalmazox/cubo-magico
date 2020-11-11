@@ -5,12 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CuboMagico.Application\CuboMagico.Application.csproj" />
+    <ProjectReference Include="..\CuboMagico.Infra.CrossCutting.Mapper\CuboMagico.Infra.CrossCutting.Mapper.csproj" />
     <ProjectReference Include="..\CuboMagico.Infra.Data\CuboMagico.Infra.Data.csproj" />
   </ItemGroup>
 

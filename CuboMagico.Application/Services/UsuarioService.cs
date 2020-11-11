@@ -1,13 +1,12 @@
 ﻿using CuboMagico.Domain.Entities;
 using CuboMagico.Domain.Interfaces.Repositories;
+using CuboMagico.Domain.Interfaces.Services;
 using CuboMagico.Domain.Interfaces.UoW;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CuboMagico.Application.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
         private readonly IUnitOfWork _uow;
 
@@ -16,16 +15,15 @@ namespace CuboMagico.Application.Services
             _uow = uow;
         }
 
-        public async void Inserir(Usuario usuario, Software software)
+        public void Inserir(Usuario usuario)
         {
-            var usuarioRepository = _uow.Repositorio<IUsuarioRepository>();
-            var softwareRepository = _uow.Repositorio<ISoftwareRepository>();
+            var usuarioRepositorio = _uow.Repositorio<IUsuarioRepository>();
+            var jaExiste = usuarioRepositorio.Unique(u => u.Email == usuario.Email) != null;
 
-            await _uow.IniciarTransacaoAsync();
-            software.Usuario = usuario;
-            usuarioRepository.Insert(usuario);
-            softwareRepository.Insert(software);
-            await _uow.ComitarTransacaoAsync();
+            if (jaExiste)
+                throw new Exception("Já existe um usuário cadastrado com esse e-mail");
+
+            usuarioRepositorio.Insert(usuario);
         }
     }
 }

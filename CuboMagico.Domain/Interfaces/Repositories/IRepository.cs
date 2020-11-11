@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace CuboMagico.Domain.Interfaces.Repositories
 {
@@ -12,6 +12,7 @@ namespace CuboMagico.Domain.Interfaces.Repositories
         where TEntity : class
     {
         TEntity Find<T>(T key);
+        TEntity Unique(Expression<Func<TEntity, bool>> filtro);
         IEnumerable<TEntity> GetAll();
         void Insert(TEntity entity);
         void Insert(IEnumerable<TEntity> entities);
