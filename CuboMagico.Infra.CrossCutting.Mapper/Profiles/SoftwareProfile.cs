@@ -4,20 +4,16 @@ using CuboMagico.Domain.ViewModels;
 
 namespace CuboMagico.Infra.CrossCutting.Mapper.Profiles
 {
-    public class UsuarioProfile : Profile
+    public class SoftwareProfile : Profile
     {
-        public UsuarioProfile()
+        public SoftwareProfile()
         {
-            CreateMap<UsuarioInserirViewModel, Usuario>();
+            CreateMap<SoftwareInserirViewModel, Software>();
 
-            CreateMap<Usuario, UsuarioBuscarViewModel>()
+            CreateMap<Software, SoftwareBuscarViewModel>()
                 .ForMember(
                     destino => destino.DataCadastro,
                     opcoes => opcoes.MapFrom(origem => origem.DataCadastro.ToLocalTime())
-                )
-                .ForMember(
-                    destino => destino.Softwares,
-                    opcoes => opcoes.MapFrom(origem => origem.Softwares)
                 );
         }
     }

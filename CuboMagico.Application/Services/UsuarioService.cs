@@ -61,10 +61,10 @@ namespace CuboMagico.Application.Services
         }
 
         public Usuario Buscar(Guid id)
-            => _uow.Repositorio<IUsuarioRepository>().Find(id);
+            => _uow.Repositorio<IUsuarioRepository>().Unique(u => u.ID == id, "Softwares");
 
         public IEnumerable<Usuario> Buscar()
-            => _uow.Repositorio<IUsuarioRepository>().GetAll();
+            => _uow.Repositorio<IUsuarioRepository>().GetAll("Softwares");
 
         public bool ValidarSenha(Usuario usuario)
         {

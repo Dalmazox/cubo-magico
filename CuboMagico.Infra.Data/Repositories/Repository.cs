@@ -62,19 +62,28 @@ namespace CuboMagico.Infra.Data.Repositories
             _context.SaveChanges();
         }
 
-        public virtual TEntity Find<T>(T key)
+        public virtual TEntity Unique(Expression<Func<TEntity, bool>> filtro, params string[] includes)
         {
-            return _dbSet.Find(key);
+            var query = _dbSet.AsQueryable();
+
+            // Adicionando JOINS na SQL usando o Include das propriedades via parametros
+            if (includes.Any())
+                foreach (var include in includes)
+                    query = _dbSet.Include(include);
+
+            return query.FirstOrDefault(filtro);
         }
 
-        public virtual TEntity Unique(Expression<Func<TEntity, bool>> filtro)
+        public virtual IEnumerable<TEntity> GetAll(params string[] includes)
         {
-            return _dbSet.FirstOrDefault(filtro);
-        }
+            var query = _dbSet.AsQueryable();
 
-        public virtual IEnumerable<TEntity> GetAll()
-        {
-            return _dbSet.AsEnumerable();
+            // Adicionando JOINS na SQL usando o Include das propriedades via parametros
+            if (includes.Any())
+                foreach (var include in includes)
+                    query = _dbSet.Include(include);
+
+            return query.ToList();
         }
 
         public virtual void Insert(TEntity entity)

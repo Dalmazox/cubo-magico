@@ -56,7 +56,8 @@ namespace CuboMagico.Infra.CrossCutting.IoC
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services
-                .AddScoped<IUsuarioService, UsuarioService>();
+                .AddScoped<IUsuarioService, UsuarioService>()
+                .AddScoped<ISoftwareService, SoftwareService>();
 
             return services;
         }

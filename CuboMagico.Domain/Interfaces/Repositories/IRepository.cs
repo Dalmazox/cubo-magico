@@ -11,9 +11,8 @@ namespace CuboMagico.Domain.Interfaces.Repositories
     public interface IRepository<TEntity> : IRepository
         where TEntity : class
     {
-        TEntity Find<T>(T key);
-        TEntity Unique(Expression<Func<TEntity, bool>> filtro);
-        IEnumerable<TEntity> GetAll();
+        TEntity Unique(Expression<Func<TEntity, bool>> filtro, params string[] includes);
+        IEnumerable<TEntity> GetAll(params string[] includes);
         void Insert(TEntity entity);
         void Insert(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
