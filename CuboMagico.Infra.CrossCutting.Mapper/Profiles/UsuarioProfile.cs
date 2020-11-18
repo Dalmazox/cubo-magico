@@ -9,6 +9,12 @@ namespace CuboMagico.Infra.CrossCutting.Mapper.Profiles
         public UsuarioProfile()
         {
             CreateMap<UsuarioInserirViewModel, Usuario>();
+
+            CreateMap<Usuario, UsuarioBuscarViewModel>()
+                .ForMember(
+                    destino => destino.DataCadastro,
+                    opcoes => opcoes.MapFrom(origem => origem.DataCadastro.ToLocalTime())
+                );
         }
     }
 }

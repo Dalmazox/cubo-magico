@@ -38,6 +38,22 @@ namespace CuboMagico.Application.Helpers
             return CriarRetorno(dados, mensagemRetorno, codigoRetorno);
         }
 
+        public IActionResult Alterado(object dados = null, string mensagem = null, int? statusCode = null)
+        {
+            var codigoRetorno = statusCode ?? StatusCodes.Status200OK;
+            var mensagemRetorno = mensagem ?? "Alterado com sucesso";
+
+            return CriarRetorno(dados, mensagemRetorno, codigoRetorno);
+        }
+
+        public IActionResult ErroValidacao(object dados = null, string mensagem = null, int? statusCode = null)
+        {
+            var codigoRetorno = statusCode ?? StatusCodes.Status400BadRequest;
+            var mensagemRetorno = mensagem ?? "Falha ao validar registros informados na requisição";
+
+            return CriarRetorno(dados, mensagemRetorno, codigoRetorno);
+        }
+
         private IActionResult CriarRetorno(object dados, string mensagem, int statusCode)
             => _builder
                 .AddStatusCode(statusCode)

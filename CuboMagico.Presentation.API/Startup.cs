@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FluentValidation.AspNetCore;
+using CuboMagico.Presentation.API.Validators;
 
 namespace CuboMagico.Presentation.API
 {
@@ -18,7 +20,13 @@ namespace CuboMagico.Presentation.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            // Fluent Validation sempre após o AddControllers
+            services
+                .AddControllers()
+                .AddFluentValidation(options =>
+                    options.RegisterValidatorsFromAssemblyContaining<UsuarioValidator>().AutomaticValidationEnabled = false
+                );
+
             services.RegisterIoC(Configuration);
         }
 
